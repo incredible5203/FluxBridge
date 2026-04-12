@@ -296,7 +296,7 @@ export class PreviewSwapComponent implements OnDestroy {
     if (el.data?.activeWallet === false) {
       state.disabled = false;
       state.action = () => this.connectWallet();
-      state.label = `Connect wallet`;
+      state.label = `Connect Wallet`;
     }
     if (tradeState?.error) {
       state.disabled = true;

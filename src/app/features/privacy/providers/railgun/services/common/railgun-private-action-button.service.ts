@@ -133,7 +133,7 @@ export class RailgunPrivateActionButtonService extends PrivateActionButtonServic
     if (!network) {
       return {
         type: 'action',
-        text: 'Connect wallet',
+        text: 'Connect Wallet',
         action: this.connectWallet.bind(this)
       };
     }
@@ -182,7 +182,7 @@ export class RailgunPrivateActionButtonService extends PrivateActionButtonServic
     if (!network) {
       return {
         type: 'action',
-        text: 'Connect wallet',
+        text: 'Connect Wallet',
         action: this.connectWallet.bind(this)
       };
     }
@@ -232,7 +232,7 @@ export class RailgunPrivateActionButtonService extends PrivateActionButtonServic
     if (!network) {
       return {
         type: 'action',
-        text: 'Connect wallet',
+        text: 'Connect Wallet',
         action: this.connectWallet.bind(this)
       };
     }

@@ -6,10 +6,13 @@ html.light {
 
   --io-background: #fff;
 
-  --tui-primary: #00e28d;
-  --tui-primary-hover: #02b774;
-  --tui-primary-active: #02b774;
-  --tui-primary-text: #14141d;
+  // --tui-primary: #00e28d;
+  // --tui-primary-hover: #02b774;
+  // --tui-primary-active: #02b774;
+  --tui-primary: linear-gradient(135deg, #4558e7 0%, #aefbf7 100%);
+  --tui-primary-hover: linear-gradient(135deg, #6367f1 0%, #aefbf7 100%);
+  --tui-primary-active: linear-gradient(135deg, #6367f1 0%, #aefbf7 100%);
+  --tui-primary-text: white;
 
   --tui-secondary: #f4f4f4; // done
   --tui-secondary-hover: #eae9e9ff;
