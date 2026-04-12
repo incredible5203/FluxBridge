@@ -1,6 +1,5 @@
 @use 'src/scss/core' as *;
 
-
 :host::ng-deep {
   tui-carousel fieldset {
     padding: 0 !important;
@@ -9,6 +8,8 @@
 
 .banner {
   @include flex(row, center, center);
+  position: relative;
+
   gap: 16px;
   width: 100vw;
   height: 57px;
@@ -22,6 +23,49 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+
+  &::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 200%;
+    height: 3px;
+
+    background: linear-gradient(270deg,
+    #9656ea,
+    #4558e7,
+    #4558e7,
+    #aefbf7,
+    #aefbf7,
+    #4558e7,
+    #4558e7,
+    #9656ea,
+    #9656ea,
+    #4558e7,
+    #4558e7,
+    #aefbf7,
+    #aefbf7,
+    #4558e7,
+    #4558e7,
+    #9656ea);
+
+    background-size: 50% 100%;
+
+    animation: bannerGradientMove 10s linear infinite;
+
+    content: '';
+  }
+
+  @keyframes bannerGradientMove {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
+  }
 
   @include b($mobile-md) {
     @include flex(row, center, space-between);
@@ -43,7 +87,7 @@
 
       line-height: normal;
       text-align: left;
-    };
+    }
   }
 
   .banner__button {

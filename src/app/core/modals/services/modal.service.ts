@@ -262,7 +262,7 @@ export class ModalService {
     this.setOpenedModalName('wallet');
     return this.showDialog<WalletsModalComponent, void>(
       WalletsModalComponent,
-      { title: 'Connect wallet', size: 'm', fitContent: true, data },
+      { title: 'Connect Wallet', size: 'm', fitContent: true, data },
       injector
     );
   }
