@@ -35,16 +35,24 @@
     background: linear-gradient(270deg,
     #9656ea,
     #4558e7,
+    #4558e7,
     #aefbf7,
+    #aefbf7,
+    #4558e7,
     #4558e7,
     #9656ea,
+    #9656ea,
+    #4558e7,
     #4558e7,
     #aefbf7,
-    #4558e7);
+    #aefbf7,
+    #4558e7,
+    #4558e7,
+    #9656ea);
 
     background-size: 50% 100%;
 
-    animation: bannerGradientMove 6s linear infinite;
+    animation: bannerGradientMove 10s linear infinite;
 
     content: '';
   }
