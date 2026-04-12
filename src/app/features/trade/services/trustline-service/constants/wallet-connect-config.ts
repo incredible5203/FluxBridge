@@ -9,7 +9,7 @@ export const WALLET_CONNECT_CONFIG: IWalletConnectConstructorParams = {
   network: WalletNetwork.PUBLIC,
   name: 'Rubic',
   url: 'https://app.rubic.exchange/',
-  icons: ['https://app.rubic.exchange/assets/images/rubic-logo.png'],
+  icons: ['https://app.rubic.exchange/assets/images/flux-logo.png'],
   description:
     'Swap crypto effortlessly on Rubic, aggregating 70+ blockchains, 220+ DEXs, and cross-chain bridges to get you the best rates possible. Exchange now!',
   method: WalletConnectAllowedMethods.SIGN
