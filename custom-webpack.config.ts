@@ -14,7 +14,8 @@ export default (
   config.resolve.fallback = {
     ...config.resolve.fallback,
     querystring: require.resolve('querystring-es3'),
-    zlib: require.resolve('browserify-zlib')
+    zlib: require.resolve('browserify-zlib'),
+    vm: false
   };
 
   if (targetOptions.configuration === 'sdk') {

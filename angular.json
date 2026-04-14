@@ -77,7 +77,8 @@
               "decimal.js-light",
               "hash.js",
               "big.js",
-              "ng-inline-svg-2/lib_commonjs/inline-svg.module"
+              "ng-inline-svg-2/lib_commonjs/inline-svg.module",
+              "@cryptorubic/core"
             ],
             "vendorChunk": true,
             "extractLicenses": false,
