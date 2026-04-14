@@ -16,12 +16,12 @@
   }
 
   &__left {
-    @include flex(row, center, start);
+    @include flex(row, center, flex-start);
     gap: 12px;
   }
 
   &__right {
-    @include flex(row, center, start);
+    @include flex(row, center, flex-start);
     gap: 12px;
   }
 }

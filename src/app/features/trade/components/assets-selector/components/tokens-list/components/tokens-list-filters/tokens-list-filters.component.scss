@@ -2,7 +2,7 @@
 
 :host {
   .filters-wrapper {
-    @include flex(row, end, space-between);
+    @include flex(row, flex-end, space-between);
     gap: 5px;
 
     width: 100%;
