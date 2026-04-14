@@ -30,28 +30,35 @@ $mobile-width: 360px;
 
 .swap-container {
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
   margin: 0 auto;
 
-  .form {
-    @include flex(column, center, center);
+  .swap-container-content {
+    display: flex;
+    align-items: flex-start;
+    margin: 0 auto;
 
-    position: relative;
+    .form {
+      @include flex(column, center, center);
 
-    gap: 10px;
+      position: relative;
 
-    width: 600px;
-    margin-right: 10px;
-    margin-left: 10px;
+      gap: 10px;
 
-    transition: 0.2s ease-in-out;
-
-    &_tokens {
       width: 600px;
-    }
+      margin-right: 10px;
+      margin-left: 10px;
 
-    &_small {
-      width: $mobile-width;
+      transition: 0.2s ease-in-out;
+
+      &_tokens {
+        width: 600px;
+      }
+
+      &_small {
+        width: $mobile-width;
+      }
     }
   }
 
@@ -105,9 +112,18 @@ $mobile-width: 360px;
     width: 100%;
     margin: 0 auto;
 
-    .form {
-      width: $mobile-width;
-      overflow: hidden;
+    .swap-container-content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--tui-padding-l);
+      align-items: center;
+      width: 100%;
+      margin: 0 auto;
+
+      .form {
+        width: $mobile-width;
+        overflow: hidden;
+      }
     }
 
     app-providers-list-general {
@@ -122,7 +138,7 @@ $mobile-width: 360px;
 
     .chart-container {
       width: $mobile-width;
-      
+
       app-crypto-rate-chart {
         width: 100%;
       }

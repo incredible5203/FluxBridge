@@ -77,6 +77,7 @@ import { ActionButtonService } from './services/action-button-service/action-but
 import { FormsTogglerService } from './services/forms-toggler/forms-toggler.service';
 import { TradeInfoManager } from './services/trade-info-manager/trade-info-manager.service';
 import { SolanaGaslessService } from './services/solana-gasless/solana-gasless.service';
+import { AdmobComponent } from '@shared/components/admob/admob.component';
 
 @NgModule({
   declarations: [
@@ -114,7 +115,8 @@ import { SolanaGaslessService } from './services/solana-gasless/solana-gasless.s
     CryptoRateChartComponent,
     SwapRetryPendingModalComponent,
     SwapBackupRateChangedModalComponent,
-    AllSwapBackupsFailedModalComponent
+    AllSwapBackupsFailedModalComponent,
+    AdmobComponent
   ],
   exports: [
     TradeViewContainerComponent,
@@ -151,7 +153,8 @@ import { SolanaGaslessService } from './services/solana-gasless/solana-gasless.s
     CryptoRateChartComponent,
     SwapRetryPendingModalComponent,
     SwapBackupRateChangedModalComponent,
-    AllSwapBackupsFailedModalComponent
+    AllSwapBackupsFailedModalComponent,
+    AdmobComponent
   ],
   imports: [
     CommonModule,

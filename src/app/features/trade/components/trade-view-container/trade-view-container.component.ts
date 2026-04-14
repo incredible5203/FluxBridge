@@ -43,6 +43,10 @@ import { DOCUMENT } from '@angular/common';
   ]
 })
 export class TradeViewContainerComponent {
+  public readonly adClient = process.env.AD_CLIENT || '';
+
+  public readonly adSlot = process.env.AD_SLOT || '';
+
   public readonly formContent$ = this.tradePageService.formContent$;
 
   public readonly providers$ = this.swapsState.tradesStore$.pipe(
