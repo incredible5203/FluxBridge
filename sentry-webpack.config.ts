@@ -1,10 +1,22 @@
 import { CustomWebpackBrowserSchema } from '@angular-builders/custom-webpack';
 import { sentryWebpackPlugin } from '@sentry/webpack-plugin';
+import * as dotenv from 'dotenv';
 
 import * as webpack from 'webpack';
 
 export default (config: webpack.Configuration, _: CustomWebpackBrowserSchema) => {
+  dotenv.config();
+
   config.devtool = 'source-map';
+  config.plugins = config.plugins || [];
+
+  config.plugins.push(
+    new webpack.DefinePlugin({
+      'process.env.AD_CLIENT': JSON.stringify(process.env.AD_CLIENT || ''),
+      'process.env.AD_SLOT': JSON.stringify(process.env.AD_SLOT || '')
+    })
+  );
+
   config.plugins.push(
     sentryWebpackPlugin({
       org: 'rubic',
