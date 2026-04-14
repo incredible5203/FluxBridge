@@ -11,7 +11,19 @@ export default (
 ) => {
   dotenv.config();
 
-  config.devtool = 'source-map';
+  const isReleaseBuild = ['production', 'stage', 'prod-api'].includes(
+    targetOptions.configuration || ''
+  );
+  const hasSentryToken = Boolean(process.env.SENTRY_AUTH_TOKEN);
+  const shouldUploadSourceMaps = isReleaseBuild && hasSentryToken;
+
+  // Full source maps are very memory-heavy. Only enable them when Sentry upload is configured.
+  if (shouldUploadSourceMaps) {
+    config.devtool = 'source-map';
+  } else if (isReleaseBuild) {
+    config.devtool = false;
+  }
+
   config.resolve = config.resolve || {};
   config.resolve.fallback = {
     ...config.resolve.fallback,
@@ -26,18 +38,13 @@ export default (
     })
   );
 
-  const isReleaseBuild = ['production', 'stage', 'prod-api'].includes(
-    targetOptions.configuration || ''
-  );
-  const hasSentryToken = Boolean(process.env.SENTRY_AUTH_TOKEN);
-  const shouldUploadSourceMaps = isReleaseBuild && hasSentryToken;
-
   if (shouldUploadSourceMaps) {
     config.plugins.push(
       sentryWebpackPlugin({
         org: 'rubic',
         project: 'rubic-app',
         authToken: process.env.SENTRY_AUTH_TOKEN,
+        telemetry: false,
         bundleSizeOptimizations: {
           excludeReplayIframe: true,
           excludeReplayShadowDom: true,
