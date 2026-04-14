@@ -90,7 +90,7 @@ export class RailgunPublicActionButtonService extends PrivateActionButtonService
     if (!network) {
       return {
         type: 'action',
-        text: 'Connect wallet',
+        text: 'Connect Wallet',
         action: this.connectWallet.bind(this)
       };
     }

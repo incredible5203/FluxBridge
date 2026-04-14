@@ -2,16 +2,20 @@ import { CustomWebpackBrowserSchema, TargetOptions } from '@angular-builders/cus
 import * as webpack from 'webpack';
 import * as path from 'path';
 import * as fs from 'fs';
+import * as dotenv from 'dotenv';
 
 export default (
   config: webpack.Configuration,
   _: CustomWebpackBrowserSchema,
   targetOptions: TargetOptions
 ) => {
+  dotenv.config();
+
   config.resolve.fallback = {
     ...config.resolve.fallback,
     querystring: require.resolve('querystring-es3'),
-    zlib: require.resolve('browserify-zlib')
+    zlib: require.resolve('browserify-zlib'),
+    vm: false
   };
 
   if (targetOptions.configuration === 'sdk') {
@@ -46,6 +50,14 @@ export default (
       'node_modules/@walletconnect/ethereum-provider/dist/index.umd.js'
     )
   };
+
+  config.plugins = config.plugins || [];
+  config.plugins.push(
+    new webpack.DefinePlugin({
+      'process.env.AD_CLIENT': JSON.stringify(process.env.AD_CLIENT || ''),
+      'process.env.AD_SLOT': JSON.stringify(process.env.AD_SLOT || '')
+    })
+  );
 
   return config;
 };

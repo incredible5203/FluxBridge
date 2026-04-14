@@ -46,7 +46,7 @@ export class HoudiniPrivateActionButtonService extends PrivateActionButtonServic
     if (!network && chainType === CHAIN_TYPE.EVM) {
       return {
         type: 'action',
-        text: 'Connect wallet',
+        text: 'Connect Wallet',
         action: this.connectWallet.bind(this)
       };
     }

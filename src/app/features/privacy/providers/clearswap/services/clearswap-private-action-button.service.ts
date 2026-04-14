@@ -50,7 +50,7 @@ export class ClearswapPrivateActionButtonService extends PrivateActionButtonServ
     if (!network || network !== BLOCKCHAIN_NAME.TRON) {
       return {
         type: 'action',
-        text: 'Connect wallet',
+        text: 'Connect Wallet',
         action: this.connectWallet.bind(this)
       };
     }
@@ -119,7 +119,7 @@ export class ClearswapPrivateActionButtonService extends PrivateActionButtonServ
     if (!network || network !== BLOCKCHAIN_NAME.TRON) {
       return {
         type: 'action',
-        text: 'Connect wallet',
+        text: 'Connect Wallet',
         action: this.connectWallet.bind(this)
       };
     }

@@ -84,7 +84,7 @@ export class PrivacycashActionButtonService extends PrivateActionButtonService {
     if (!network || network !== swapInfo.fromAsset.blockchain) {
       return {
         type: 'action',
-        text: 'Connect wallet',
+        text: 'Connect Wallet',
         action: this.connectWallet.bind(this)
       };
     }
@@ -141,7 +141,7 @@ export class PrivacycashActionButtonService extends PrivateActionButtonService {
     if (!network || network !== transferAsset.blockchain) {
       return {
         type: 'action',
-        text: 'Connect wallet',
+        text: 'Connect Wallet',
         action: this.connectWallet.bind(this)
       };
     }
@@ -207,7 +207,7 @@ export class PrivacycashActionButtonService extends PrivateActionButtonService {
     if (!network || network !== revealAsset.blockchain) {
       return {
         type: 'action',
-        text: 'Connect wallet',
+        text: 'Connect Wallet',
         action: this.connectWallet.bind(this)
       };
     }
@@ -262,7 +262,7 @@ export class PrivacycashActionButtonService extends PrivateActionButtonService {
     if (!network || network !== hideAsset.blockchain) {
       return {
         type: 'action',
-        text: 'Connect wallet',
+        text: 'Connect Wallet',
         action: this.connectWallet.bind(this)
       };
     }
@@ -297,7 +297,7 @@ export class PrivacycashActionButtonService extends PrivateActionButtonService {
     if (!network || network !== refundAsset.blockchain) {
       return {
         type: 'action',
-        text: 'Connect wallet',
+        text: 'Connect Wallet',
         action: this.connectWallet.bind(this)
       };
     }

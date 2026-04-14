@@ -91,7 +91,7 @@ export class ActionButtonService {
     if (!address && !isTransferFromNonEvm) {
       return {
         type: 'action',
-        text: 'Connect wallet',
+        text: 'Connect Wallet',
         action: this.connectWallet.bind(this)
       };
     }

@@ -43,6 +43,10 @@ import { DOCUMENT } from '@angular/common';
   ]
 })
 export class TradeViewContainerComponent {
+  public readonly adClient = process.env.AD_CLIENT || '';
+
+  public readonly adSlot = process.env.AD_SLOT || '';
+
   public readonly formContent$ = this.tradePageService.formContent$;
 
   public readonly providers$ = this.swapsState.tradesStore$.pipe(
@@ -106,7 +110,7 @@ export class TradeViewContainerComponent {
     const buttonStatus = await firstValueFrom(this.buttonState$);
     if (buttonStatus.text === 'Preview swap') {
       buttonStatus.action();
-    } else if (buttonStatus.type === 'error' || buttonStatus.text === 'Connect wallet') {
+    } else if (buttonStatus.type === 'error' || buttonStatus.text === 'Connect Wallet') {
       this.notificationsService.show(buttonStatus.text, {
         status: TuiNotification.Warning,
         autoClose: 5_000,

@@ -643,7 +643,7 @@
       "unauthorized": "Kullanıcının yetkisi yoktur. Jetonları favori yapmak için lütfen giriş yapın."
     },
     "walletsModal": {
-      "title": "Connect wallet",
+      "title": "Connect Wallet",
       "new": "New to Ethereum?",
       "learnMore": "Learn more about wallets"
     },

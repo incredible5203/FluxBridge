@@ -1,17 +1,13 @@
-![alt text](https://github.com/Cryptorubic/rubic-frontend/blob/master/src/assets/images/rbc.svg "Rubic — Multichain DeFi platform")
+![alt text](https://github.com/incredible5203/FluxBridge/blob/develop/src/assets/images/flux-main-logo.png 'FluxBridge — Multichain DeFi platform')
 
 # Multichain DeFi platform
-[Try our platform](https://app.rubic.exchange/)
 
-[Read more about us](https://rubic.exchange/)
+[Try our platform](https://fluxbridge.cc/)
 
-![alt text](./docs/Banner.png "")
+## FluxBridge organizes DeFi services to enable a project to create, manage and trade tokens in one place.
 
-## Rubic organizes defi services to enable a project to create, manage and trade tokens decentralized in ONE PLACE.
-We already provide multichain services for creating and managing tokens (airdrop, crowdsale, pools) powered by MyWish.
+We provide multichain services for bridging, managing, and transferring digital assets across
+supported networks.
 
-Rubic's goal is to add multichain p2p trades to existing services and develop other products such as liquidity pools. And make it simple and user friendly.
-
-[Read White Paper](https://rubic.exchange/pdf/white-paper.pdf)
-
-[Read One Pager](https://rubic.exchange/pdf/one-pager.pdf)
+FluxBridge's goal is to make cross-chain transfers simple, secure, and user friendly, while
+expanding toward more multichain DeFi products.
