@@ -26,17 +26,18 @@ export default (
     })
   );
 
-  const shouldUploadSourceMaps = ['production', 'stage', 'prod-api'].includes(
+  const isReleaseBuild = ['production', 'stage', 'prod-api'].includes(
     targetOptions.configuration || ''
   );
+  const hasSentryToken = Boolean(process.env.SENTRY_AUTH_TOKEN);
+  const shouldUploadSourceMaps = isReleaseBuild && hasSentryToken;
 
   if (shouldUploadSourceMaps) {
     config.plugins.push(
       sentryWebpackPlugin({
         org: 'rubic',
         project: 'rubic-app',
-        authToken:
-          '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', //process.env.SENTRY_AUTH_TOKEN,
+        authToken: process.env.SENTRY_AUTH_TOKEN,
         bundleSizeOptimizations: {
           excludeReplayIframe: true,
           excludeReplayShadowDom: true,
