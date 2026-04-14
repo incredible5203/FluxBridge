@@ -1,5 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "yarn build",
+  "installCommand": "HUSKY=0 yarn install --frozen-lockfile",
+  "buildCommand": "NG_PERSISTENT_BUILD_CACHE=1 yarn build",
   "outputDirectory": "dist/rubic"
 }
