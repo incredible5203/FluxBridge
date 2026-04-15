@@ -5,14 +5,24 @@ html.light {
   --dropdpwn-background: rgba(60, 61, 68, 0.85);
 
   --io-background: #fff;
+  --panel-background: rgba(255, 255, 255, 0.92);
+  --panel-background-soft: #f8fbff;
+  --panel-border: rgba(69, 88, 231, 0.16);
+  --panel-border-strong: rgba(69, 88, 231, 0.25);
+  --panel-shadow: 0 10px 32px rgba(69, 88, 231, 0.12);
+  --panel-radius: 20px;
 
   // --tui-primary: #00e28d;
   // --tui-primary-hover: #02b774;
   // --tui-primary-active: #02b774;
-  --tui-primary: linear-gradient(135deg, #4558e7 0%, #aefbf7 100%);
-  --tui-primary-hover: linear-gradient(135deg, #6367f1 0%, #aefbf7 100%);
-  --tui-primary-active: linear-gradient(135deg, #6367f1 0%, #aefbf7 100%);
-  --tui-primary-text: white;
+  --tui-primary: #5669f5;
+  --tui-primary-hover: #6a7aff;
+  --tui-primary-active: #4b5de0;
+  --tui-primary-text: #fff;
+
+  --brand-gradient: linear-gradient(135deg, #4558e7 0%, #aefbf7 100%);
+  --brand-gradient-hover: linear-gradient(135deg, #5b6af0 0%, #c0fffb 100%);
+  --brand-gradient-active: linear-gradient(135deg, #3e50d8 0%, #9bf1ec 100%);
 
   --tui-secondary: #f4f4f4; // done
   --tui-secondary-hover: #eae9e9ff;

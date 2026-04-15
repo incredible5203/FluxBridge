@@ -17,24 +17,34 @@ $transparent-white: rgba(255, 255, 255, 0.1);
 
 // ***** vars *****
 :root {
-  --app-background: #282935;
+  --app-background: #0f1220;
   --primary-background: var(--tui-base-01);
   --secondary-background: var(--tui-secondary);
   --dropdpwn-background: rgba(60, 61, 68, 0.85);
 
-  --io-background: #222331;
+  --io-background: #171b2c;
+  --panel-background: rgba(23, 27, 44, 0.88);
+  --panel-background-soft: rgba(28, 33, 53, 0.9);
+  --panel-border: rgba(174, 251, 247, 0.16);
+  --panel-border-strong: rgba(174, 251, 247, 0.28);
+  --panel-shadow: 0 14px 40px rgba(4, 8, 20, 0.35);
+  --panel-radius: 20px;
 
   // --tui-primary: #00e28d;
   // --tui-primary-hover: #02b774;
   // --tui-primary-active: #02b774;
-  --tui-primary: linear-gradient(135deg, #4558e7 0%, #aefbf7 100%);
-  --tui-primary-hover: linear-gradient(135deg, #6367f1 0%, #aefbf7 100%);
-  --tui-primary-active: linear-gradient(135deg, #6367f1 0%, #aefbf7 100%);
-  --tui-primary-text: #14141d;
+  --tui-primary: #6b7cff;
+  --tui-primary-hover: #7c8aff;
+  --tui-primary-active: #5d6ee8;
+  --tui-primary-text: #fff;
 
-  --tui-secondary: #3b3d4f;
-  --tui-secondary-hover: #4c4e67;
-  --tui-secondary-active: #4c4e67;
+  --brand-gradient: linear-gradient(135deg, #4558e7 0%, #aefbf7 100%);
+  --brand-gradient-hover: linear-gradient(135deg, #5b6af0 0%, #c0fffb 100%);
+  --brand-gradient-active: linear-gradient(135deg, #3e50d8 0%, #9bf1ec 100%);
+
+  --tui-secondary: #252b43;
+  --tui-secondary-hover: #2e3553;
+  --tui-secondary-active: #2e3553;
 
   --tui-elevation-01: var(--tui-secondary);
   --tui-elevation-02: var(--tui-secondary);
@@ -45,14 +55,14 @@ $transparent-white: rgba(255, 255, 255, 0.1);
 
   --tui-warn: #cfa200;
 
-  --tui-base-01: #2c2d3e;
-  --tui-base-02: #2c2d3e;
-  --tui-base-03: #2c2d3e;
+  --tui-base-01: #171b2c;
+  --tui-base-02: #1c2135;
+  --tui-base-03: #1c2135;
   --tui-base-04: #4d4d59;
 
-  --tui-text-01: white;
-  --tui-text-02: #9a9ab0;
-  --tui-text-03: #9a9ab0;
+  --tui-text-01: #f5f8ff;
+  --tui-text-02: #9ca6c2;
+  --tui-text-03: #9ca6c2;
 
   --tui-padding-xs: 0.25rem;
   --tui-padding-s: 0.5rem;
