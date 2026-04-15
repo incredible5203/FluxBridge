@@ -88,8 +88,10 @@ $mobile-width: 360px;
     width: $mobile-width;
     height: 510px;
 
-    background: var(--secondary-background);
-    border-radius: 17px;
+    background: var(--panel-background);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--panel-radius);
+    box-shadow: var(--panel-shadow);
   }
 }
 

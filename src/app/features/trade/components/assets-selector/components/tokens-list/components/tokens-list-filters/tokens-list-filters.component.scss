@@ -1,6 +1,13 @@
 @use 'src/scss/core' as *;
 
 :host {
+  --token-filter-bg: #2c2d3e;
+  --token-filter-hover-bg: var(--tui-secondary-hover);
+  --token-filter-active-bg: var(--tui-secondary-active);
+  --token-filter-active-border: transparent;
+  --token-filter-icon: none;
+  --token-filter-icon-active: none;
+
   .filters-wrapper {
     @include flex(row, flex-end, space-between);
     gap: 5px;
@@ -25,11 +32,11 @@
   .filters-wrapper__prev-btn {
     padding: 11px 5px;
 
-    background-color: #2c2d3e;
+    background-color: var(--token-filter-bg);
     border-radius: var(--tui-radius-s);
 
     &:hover {
-      background-color: var(--tui-secondary-hover);
+      background-color: var(--token-filter-hover-bg);
     }
   }
 
@@ -54,7 +61,8 @@
     margin: 0 auto;
     margin-left: -18px;
     
-    background: #2c2d3e;
+    background: var(--token-filter-bg);
+    border: 1px solid transparent;
     border-radius: 8px;
 
     transition: all 100ms;
@@ -64,16 +72,19 @@
     }
 
     &:hover {
-      background: var(--tui-secondary-hover);
+      background: var(--token-filter-hover-bg);
       cursor: pointer;
     }
         
     &__active {
-      background: var(--tui-secondary-active);
+      background: var(--token-filter-active-bg);
+      border-color: var(--token-filter-active-border);
     }
 
     &__icon {
       height: 15px;
+
+      filter: var(--token-filter-icon);
     }
   }
 
@@ -85,5 +96,45 @@
       white-space: no-wrap;
       text-align: center;
     }
+  }
+}
+
+:host-context(html.light) {
+  --token-filter-bg: #eef2ff;
+  --token-filter-hover-bg: #e4ebff;
+  --token-filter-active-bg: #dbe5ff;
+  --token-filter-active-border: rgba(69, 88, 231, 0.35);
+  --token-filter-icon: invert(26%) sepia(14%) saturate(1882%) hue-rotate(189deg) brightness(90%) contrast(87%);
+  --token-filter-icon-active: invert(18%) sepia(39%) saturate(1045%) hue-rotate(200deg) brightness(91%) contrast(92%);
+
+  .filters-wrapper {
+    background-color: var(--panel-background-soft);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--panel-radius);
+  }
+
+  .filters-wrapper__next-btn,
+  .filters-wrapper__prev-btn {
+    border: 1px solid rgba(69, 88, 231, 0.22);
+  }
+
+  .token-filter__text {
+    color: #35426c;
+    font-weight: 500;
+  }
+
+  .token-filter__active {
+    .token-filter__icon {
+      filter: var(--token-filter-icon-active);
+    }
+
+    .token-filter__text {
+      color: #1f2f66;
+      font-weight: 600;
+    }
+  }
+
+  .token-filter__icon {
+    filter: var(--token-filter-icon);
   }
 }

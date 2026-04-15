@@ -1,5 +1,11 @@
 @use 'src/scss/core' as *;
 
+:host {
+  --chain-filter-icon: invert(0);
+  --chain-filter-icon-active: invert(1);
+  --chain-filter-text: var(--tui-text-01);
+  --chain-filter-text-active: #000;
+}
 
 .filter-list-element {
   ::ng-deep {
@@ -15,12 +21,14 @@
     .t-content {
       gap: 8px;
 
+      color: var(--chain-filter-text);
+
       font-size: 12px;
     }
   }
 
   &__icon {
-    filter: invert(0);
+    filter: var(--chain-filter-icon);
 
     transition: filter var(--tui-duration, 300ms) ease-in-out;
   }
@@ -28,7 +36,7 @@
   &__clicked-element {
     ::ng-deep {
       .t-wrapper {
-        color: black;
+        color: var(--chain-filter-text-active);
 
         background: var(--tui-primary);
 
@@ -39,8 +47,16 @@
     }
 
     .filter-list-element__icon {
-      filter: invert(1);
+      filter: var(--chain-filter-icon-active);
     }
   }
+}
+
+:host-context(html.light) {
+  --chain-filter-icon: invert(27%) sepia(12%) saturate(1786%) hue-rotate(193deg) brightness(91%) contrast(90%);
+  --chain-filter-icon-active: invert(18%) sepia(44%) saturate(1198%) hue-rotate(202deg) brightness(91%)
+    contrast(94%);
+  --chain-filter-text: #3a4670;
+  --chain-filter-text-active: #1f2f66;
 }
 

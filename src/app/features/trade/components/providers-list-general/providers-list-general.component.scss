@@ -28,8 +28,9 @@ h5 {
   margin-top: var(--tui-padding-m);
   padding: var(--tui-padding-l);
 
-  background: var(--io-background);
-  border-radius: var(--tui-radius-m);
+  background: var(--panel-background-soft);
+  border: 1px solid var(--panel-border);
+  border-radius: calc(var(--panel-radius) - 2px);
 
   &__text {
     @include font(18px, 18px, 500, var(--tui-text-01), 0.54px);
