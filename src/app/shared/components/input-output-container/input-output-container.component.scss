@@ -6,8 +6,9 @@
   justify-content: center;
   padding: var(--tui-padding-l);
 
-  background: var(--io-background);
-  border-radius: var(--tui-radius-m);
+  background: var(--panel-background-soft);
+  border: 1px solid var(--panel-border);
+  border-radius: calc(var(--panel-radius) - 2px);
 
   transition: 0.2s ease-in-out;
 

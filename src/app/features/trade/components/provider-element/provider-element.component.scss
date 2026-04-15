@@ -3,8 +3,10 @@
 .element {
   overflow: hidden;
 
-  background: var(--primary-background);
-  border-radius: var(--tui-radius-m);
+  background: var(--panel-background-soft);
+  border: 1px solid var(--panel-border);
+  border-radius: calc(var(--panel-radius) - 3px);
+  box-shadow: 0 8px 20px rgba(4, 8, 20, 0.18);
   cursor: pointer;
 
   &_disabled {
@@ -15,10 +17,12 @@
   &__provider-container {
     padding: var(--tui-padding-l);
 
-    border-bottom: 1px solid var(--tui-secondary);
+    border-bottom: 1px solid var(--panel-border);
 
     &_selected {
-      background: var(--io-background);
+      background: linear-gradient(90deg,
+      rgba(69, 88, 231, 0.18) 0%,
+      rgba(174, 251, 247, 0.08) 100%);
     }
   }
 

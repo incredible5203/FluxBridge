@@ -23,8 +23,10 @@
     gap: var(--tui-padding-s);
     padding: var(--tui-padding-l);
 
-    background: var(--primary-background);
-    border-radius: var(--tui-radius-m);
+    background: var(--panel-background-soft);
+    border: 1px solid var(--panel-border);
+    border-radius: calc(var(--panel-radius) - 2px);
+    box-shadow: var(--panel-shadow);
 
     app-route-element {
       margin-left: var(--tui-padding-l);
@@ -115,8 +117,9 @@
   &__success-info {
     overflow: hidden;
 
-    background: var(--primary-background);
-    border-radius: var(--tui-radius-m);
+    background: var(--panel-background-soft);
+    border: 1px solid var(--panel-border);
+    border-radius: calc(var(--panel-radius) - 2px);
   }
 }
 
@@ -124,8 +127,9 @@ app-swap-data-element ::ng-deep {
   .provider-info {
     padding: var(--tui-padding-l);
 
-    background: var(--primary-background);
-    border-radius: var(--tui-radius-m);
+    background: var(--panel-background-soft);
+    border: 1px solid var(--panel-border);
+    border-radius: calc(var(--panel-radius) - 2px);
   }
 }
 
