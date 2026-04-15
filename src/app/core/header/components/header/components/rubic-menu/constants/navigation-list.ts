@@ -48,19 +48,9 @@ export const MOBILE_NAVIGATION_LIST: { [key in Section]: NavigationItem[] } = {
       link: 'https://twitter.com/CryptoRubic'
     },
     {
-      translateKey: 'Reddit',
-      type: 'external',
-      link: 'https://www.reddit.com/r/Rubic/new/'
-    },
-    {
       translateKey: 'Telegram',
       type: 'external',
-      link: 'https://t.me/cryptorubic_chat'
-    },
-    {
-      translateKey: 'Dune',
-      type: 'external',
-      link: 'https://dune.com/rubic/rubic-general-dashboard'
+      link: 'https://t.me/flux_bridge'
     },
     {
       translateKey: 'Mail',
@@ -68,29 +58,9 @@ export const MOBILE_NAVIGATION_LIST: { [key in Section]: NavigationItem[] } = {
       link: 'mailto:support@rubic.finance'
     },
     {
-      translateKey: 'Medium',
-      type: 'external',
-      link: 'https://cryptorubic.medium.com/'
-    },
-    {
       translateKey: 'Discord',
       type: 'external',
       link: 'https://discord.gg/7EYzPbWKFQ'
-    },
-    {
-      translateKey: 'Coinmarketcap',
-      type: 'external',
-      link: 'https://coinmarketcap.com/currencies/rubic'
-    },
-    {
-      translateKey: 'Coingecko',
-      type: 'external',
-      link: 'https://www.coingecko.com/en/coins/rubic'
-    },
-    {
-      translateKey: 'Youtube',
-      type: 'external',
-      link: 'https://www.youtube.com/c/RubicExchange'
     }
   ],
   ['Legal & Privacy']: [

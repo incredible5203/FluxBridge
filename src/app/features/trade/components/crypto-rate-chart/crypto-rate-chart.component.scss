@@ -1,15 +1,40 @@
 @use 'src/scss/core' as *;
 
 :host {
+  display: block;
+
   .boilerplate {
     @include flex(row, center, center);
+
+    color: var(--tui-text-02);
     font-size: 18px;
-        
+
     background: var(--primary-background);
-    border-radius: var(--tui-radius-m);
+    border-radius: var(--panel-radius);
+    box-shadow: var(--panel-shadow);
   }
-    
+
   .tradingview-widget-container {
     width: 100%;
+    overflow: hidden;
+
+    border-radius: var(--panel-radius);
+    box-shadow: var(--panel-shadow);
+  }
+}
+
+:host-context(html.light) {
+  .boilerplate {
+    color: #3a4670;
+    font-weight: 500;
+
+    background: var(--panel-background-soft);
+    border: 1px solid var(--panel-border);
+    box-shadow: var(--panel-shadow);
+  }
+
+  .tradingview-widget-container {
+    background: var(--panel-background-soft);
+    border: 1px solid var(--panel-border);
   }
 }

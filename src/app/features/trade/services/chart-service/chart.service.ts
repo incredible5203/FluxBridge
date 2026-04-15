@@ -1,5 +1,5 @@
 import { Inject, Injectable, Renderer2 } from '@angular/core';
-import { BehaviorSubject, distinctUntilChanged, map, takeUntil } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, map, skip, takeUntil } from 'rxjs';
 import { ChartInfo, ChartSize } from './models';
 import { HeaderStore } from '@app/core/header/services/header.store';
 import { DOCUMENT } from '@angular/common';
@@ -8,6 +8,7 @@ import { compareTokens } from '@app/shared/utils/utils';
 import { compareAssets } from '../../utils/compare-assets';
 import { TradePageService } from '../trade-page/trade-page.service';
 import { GoogleTagManagerService } from '@app/core/services/google-tag-manager/google-tag-manager.service';
+import { ThemeService } from '@app/core/services/theme/theme.service';
 import { SwapsFormService } from '../swaps-form/swaps-form.service';
 
 @Injectable({
@@ -38,6 +39,7 @@ export class ChartService {
     private readonly headerStore: HeaderStore,
     private readonly tradePageService: TradePageService,
     private readonly gtmService: GoogleTagManagerService,
+    private readonly themeService: ThemeService,
     @Inject(DOCUMENT) private readonly document: Document,
     private readonly destroy$: TuiDestroyService
   ) {}
@@ -136,6 +138,19 @@ export class ChartService {
           swapsFormService.inputValue.toToken
         );
     });
+
+    this.themeService.theme$
+      .pipe(skip(1), distinctUntilChanged(), takeUntil(this.destroy$))
+      .subscribe(() => {
+        const inputValue = swapsFormService.inputValue;
+        const container = this.document.getElementById(
+          'tradingview-widget-container'
+        ) as HTMLElement;
+
+        if (inputValue.fromToken && inputValue.toToken && container) {
+          this.createAndInvokeScript(swapsFormService);
+        }
+      });
   }
 
   public createAndInvokeScript(swapsFormService: SwapsFormService): void {
@@ -150,49 +165,7 @@ export class ChartService {
     this.script.src =
       'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
     this.script.async = true;
-    this.script.text = `{
-        "symbol": "${this.getChartSymbol(fromToken, toToken)}",
-        "style": "3",
-        "locale": "en",
-        "timezone": "Europe/Istanbul",
-        "interval": "1D",
-        "theme": "dark",
-        "lineColor": "#00e28d",
-        "topColor": "#00e28d",
-        "bottomColor": "#515353ff",
-        "maLineColor": "#00e28d",
-        "underLineBottomColor": "#3b3d4f",
-        "backgroundColor": "#3b3d4f",
-        "trendLineColor": "#00e28d",
-        "textColor": "#00e28d",
-        "fontSize": 16,
-        "isTransparent": true,
-        "chartOnly": true,
-        "noTimeScale": true,
-        "height": "${this.chartInfo.size.height}",
-        "width": "${this.chartInfo.size.width}",
-        "hide_side_toolbar": true,
-        "hide_top_toolbar": true,
-        "calendar": false,
-        "details": false,
-        "withdateranges": false,
-        "allow_symbol_change": false,
-        "studies": [],
-        "show_popup_button": false,
-        "watchlist": false,
-        "hideideas": true,
-        "hide_legend": false,
-        "hide_volume": true,
-        "hide_ma_toggle": true,
-        "hide_search": true,
-        "hide_interval_dialog": true,
-        "save_image": false,
-        "hotlist": false,
-        "enable_publishing": false,
-        "display_mode": "regular",
-        "allow_volume_zoom": false,
-        "gridColor": "rgba(0, 0, 0, 0)"
-    }`;
+    this.script.text = JSON.stringify(this.getTradingViewEmbedConfig(fromToken, toToken));
 
     this.script.addEventListener('load', () => {
       this.script.remove();
@@ -207,6 +180,78 @@ export class ChartService {
     // calls script and creates iframe with TradingView widget
     this.renderer.appendChild(container, this.script);
     this.roundIframeBorderOnLoad(container);
+  }
+
+  private getTradingViewEmbedConfig(
+    fromToken: { symbol: string },
+    toToken: { symbol: string }
+  ): Record<string, unknown> {
+    const size = this.chartInfo.size;
+    const isLight = this.themeService.theme === 'light';
+
+    const base = {
+      symbol: this.getChartSymbol(fromToken, toToken),
+      style: '3',
+      locale: 'en',
+      timezone: 'Europe/Istanbul',
+      interval: '1D',
+      fontSize: 16,
+      isTransparent: true,
+      chartOnly: true,
+      noTimeScale: true,
+      height: size.height,
+      width: size.width,
+      hide_side_toolbar: true,
+      hide_top_toolbar: true,
+      calendar: false,
+      details: false,
+      withdateranges: false,
+      allow_symbol_change: false,
+      studies: [] as string[],
+      show_popup_button: false,
+      watchlist: false,
+      hideideas: true,
+      hide_legend: false,
+      hide_volume: true,
+      hide_ma_toggle: true,
+      hide_search: true,
+      hide_interval_dialog: true,
+      save_image: false,
+      hotlist: false,
+      enable_publishing: false,
+      display_mode: 'regular',
+      allow_volume_zoom: false
+    };
+
+    if (isLight) {
+      return {
+        ...base,
+        theme: 'light',
+        lineColor: '#4558e7',
+        topColor: 'rgba(69, 88, 231, 0.35)',
+        bottomColor: 'rgba(69, 88, 231, 0.08)',
+        maLineColor: '#4558e7',
+        underLineBottomColor: '#eef2ff',
+        backgroundColor: '#ffffff',
+        trendLineColor: '#4558e7',
+        textColor: '#35426c',
+        gridColor: 'rgba(20, 20, 30, 0.08)'
+      };
+    }
+
+    return {
+      ...base,
+      theme: 'dark',
+      lineColor: '#00e28d',
+      topColor: '#00e28d',
+      bottomColor: '#515353ff',
+      maLineColor: '#00e28d',
+      underLineBottomColor: '#3b3d4f',
+      backgroundColor: '#3b3d4f',
+      trendLineColor: '#00e28d',
+      textColor: '#00e28d',
+      gridColor: 'rgba(0, 0, 0, 0)'
+    };
   }
 
   // @FIX handle symbols USDC.e axelUSDC etc.
