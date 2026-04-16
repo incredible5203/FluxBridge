@@ -119,10 +119,10 @@ export class AppModule {
       }
 
       if (isParamsExists) {
-        canonicalTag.setAttribute('href', `https://app.rubic.exchange/`);
+        canonicalTag.setAttribute('href', `https://fluxbridge.cc/`);
         this.meta.updateTag({ name: 'robots', content: 'noindex' });
       } else {
-        canonicalTag.setAttribute('href', `https://app.rubic.exchange${event.urlAfterRedirects}`);
+        canonicalTag.setAttribute('href', `https://fluxbridge.cc${event.urlAfterRedirects}`);
         this.meta.updateTag({ name: 'robots', content: 'index,follow' });
       }
     });

@@ -170,7 +170,7 @@
       },
       {
         "title": "Weshalb benötigen On-Chain-Transaktionen oftmals mehr Zeit und werden als “ausstehend” gekennzeichnet?",
-        "answer": "Es ist möglich, dass die initial genehmigte Gas-Gebühr nicht ausreicht, um die Transaktion abzuschließen. \n\nDu kannst die Transaktion beschleunigen, indem Du das Gas-Limit manuell erhöhst und damit bereit bist, höhere Gas-Gebühren zu tragen. Dies erfolgt direkt über Dein Wallet (und nicht über unsere Plattform).\n\nWenn Du Hilfe benötigst, nutze gerne unser Ticketsystem oder wende Dich an unseren Telegram-Bot <a href='https://t.me/RubicSupportBot' target='_blank'>https://t.me/RubicSupportBot</a>"
+        "answer": "Es ist möglich, dass die initial genehmigte Gas-Gebühr nicht ausreicht, um die Transaktion abzuschließen. \n\nDu kannst die Transaktion beschleunigen, indem Du das Gas-Limit manuell erhöhst und damit bereit bist, höhere Gas-Gebühren zu tragen. Dies erfolgt direkt über Dein Wallet (und nicht über unsere Plattform).\n\nWenn Du Hilfe benötigst, nutze gerne unser Ticketsystem oder wende Dich an unseren Telegram <a href='https://t.me/flux_bridge' target='_blank'>https://t.me/flux_bridge</a>"
       },
       {
         "title": "Warum erhalte ich die Meldung “Guthaben reicht nicht aus”?",
@@ -194,7 +194,7 @@
       },
       {
         "title": "Meine Multi-Chain-Transaktionen wird seit längerem mit “Ausstehend” gekennzeichnet. Was ist der Grund?",
-        "answer": "In der Regel liegt es daran, dass sich die Gas-Preise zwischenzeitlich stark erhöht haben. \nWenn die bisher Problemlösungen nicht helfen, erhältst Du Hilfestellung in unserem Live Chat oder über unseren Telegram Bot: <a href='https://t.me/RubicSupportBot' target='_blank'>https://t.me/RubicSupportBot</a>"
+        "answer": "In der Regel liegt es daran, dass sich die Gas-Preise zwischenzeitlich stark erhöht haben. \nWenn die bisher Problemlösungen nicht helfen, erhältst Du Hilfestellung in unserem Live Chat oder über unseren Telegram: <a href='https://t.me/flux_bridge' target='_blank'>https://t.me/flux_bridge</a>"
       },
       {
         "title": "Warum stehen nicht sämtliche Multi-Chain Swaps zur Verfügung?",
@@ -523,7 +523,7 @@
       "pageSoon": " -Seite sichtbar sein.",
       "title": "Die Transaktion wurde erfolgreich gestartet!",
       "ccrTitle": "Transaktion wurde erfolgreich im Ursprungsnetzwerk durchgeführt!",
-      "seeDetailsCCR": " If your transaction seems to be taking longer than normal (more than 30 minutes), please contact our Support Team at <a class='modal__footer-link' href='mailto:support@rubic.exchange' target='_blank'>support@rubic.exchange</a>",
+      "seeDetailsCCR": " If your transaction seems to be taking longer than normal (more than 30 minutes), please contact our Support Team at <a class='modal__footer-link' href='mailto:support@fluxbridge.cc' target='_blank'>support@fluxbridge.cc</a>",
       "seeDetailsItBridge": "<a class='modal__footer-link' href='{{explorerLink}}' target='_blank'>Transaktionsdetails</a> ansehen.",
       "link": "Meine Transaktionen"
     },

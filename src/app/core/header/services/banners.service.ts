@@ -9,11 +9,11 @@ const REFETCH_AFTER = 60 * 10 * 1_000;
 
 const DEFAULT_BANNERS: ApiBanner[] = [
   {
-    text: '<b style="color: #00e28d">0 Fees</b> On Rubic For Swaps Below 100$!',
-    textMobile: '<b style="color: #00e28d">0 Fees</b> <b>On Rubic</b><br>For Swaps Below 100$!',
+    text: '<b style="color: #00e28d">0 Fees</b> On FluxBridge For Swaps Below 100$!',
+    textMobile:
+      '<b style="color: #00e28d">0 Fees</b> <b>On FluxBridge</b><br>For Swaps Below 100$!',
     buttonText: '<b>Learn More<b/>',
-    linkUrl:
-      'https://app.rubic.exchange/?fromChain=ARBITRUM&toChain=ETH&from=USDC&to=ETH&amount=90',
+    linkUrl: 'https://fluxbridge.cc/?fromChain=ARBITRUM&toChain=ETH&from=USDC&to=ETH&amount=90',
     imageUrlDesktop: 'assets/banner/zero-fees-bg.png',
     imageUrlMobile: 'assets/banner/zero-fees-mobile.png'
   }
@@ -41,7 +41,8 @@ export class BannersService {
     if (!html) return html;
 
     const APP = 'https://app.rubic.exchange';
-    const LOCAL = 'https://local.rubic.exchange:4224';
+    // const LOCAL = 'https://local.rubic.exchange:4224';
+    const LOCAL = 'https://fluxbridge.cc';
 
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
@@ -87,7 +88,8 @@ export class BannersService {
     if (!url) return url;
 
     const APP = 'https://app.rubic.exchange';
-    const LOCAL = 'https://local.rubic.exchange:4224';
+    // const LOCAL = 'https://local.rubic.exchange:4224';
+    const LOCAL = 'https://fluxbridge.cc';
 
     return url.startsWith(APP) ? url.replace(APP, LOCAL) : url;
   }
