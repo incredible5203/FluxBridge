@@ -19,6 +19,7 @@
     "prebuild": "node scripts/build-timestamp.js",
     "build:base": "node scripts/build-timestamp.js && node --max-old-space-size=6144 ./node_modules/@angular/cli/bin/ng build",
     "build": "npm run build:base -- --configuration=production",
+    "build:vercel": "node scripts/build-timestamp.js && node --max-old-space-size=5120 ./node_modules/@angular/cli/bin/ng build --configuration=production",
     "build:dev": "npm run build:base",
     "build:dev2": "npm run build:base -- --configuration=dev2",
     "build:dev3": "npm run build:base -- --configuration=dev3",
