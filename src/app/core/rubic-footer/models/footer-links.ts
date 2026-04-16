@@ -5,7 +5,7 @@ export const FOOTER_LINKS: FooterLink[] = [
     dark: 'assets/images/contacts/twitter.svg',
     light: 'assets/images/contacts/twitter_light.svg',
     altText: 'Twitter',
-    link: 'https://twitter.com/flux_bridge'
+    link: 'https://twitter.com/fluxbridge'
   },
   {
     dark: 'assets/images/contacts/telegram.svg',
