@@ -11,6 +11,11 @@ export default (
 ) => {
   dotenv.config();
 
+  // Vercel build containers have limited RAM; default webpack parallelism can OOM (SIGKILL).
+  if (process.env.VERCEL) {
+    config.parallelism = 1;
+  }
+
   const isReleaseBuild = ['production', 'stage', 'prod-api'].includes(
     targetOptions.configuration || ''
   );
