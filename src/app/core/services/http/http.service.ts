@@ -30,6 +30,7 @@ export class HttpService {
     options: GetRequestOptions = defaultGetRequestOptions
   ): Observable<T> {
     const fullUrl = (path || SERVER_REST_URL) + (url || '');
+    console.log('fullUrl', fullUrl);
     const request$ = this.http.get<T>(fullUrl, {
       params: data || {}
     });
