@@ -48,7 +48,6 @@ import {
   delay,
   exhaustMap,
   filter,
-  first,
   retry,
   startWith,
   switchMap,
@@ -92,7 +91,7 @@ export class RubicApiService {
     const ioClient = io(this.apiUrl, {
       reconnectionDelayMax: 10000,
       path: `/api/routes/ws/`,
-      transports: ['websocket'],
+      transports: ['websocket', 'polling'],
       autoConnect: true,
       reconnection: true
     });
@@ -316,7 +315,6 @@ export class RubicApiService {
   public handleQuotesAsync(): Observable<WrappedAsyncTradeOrNull> {
     return this.socket$.pipe(
       filter((socket): socket is NonNullable<typeof socket> => !!socket),
-      first(),
       switchMap(socket =>
         fromEvent<
           WsQuoteResponseInterface & {
