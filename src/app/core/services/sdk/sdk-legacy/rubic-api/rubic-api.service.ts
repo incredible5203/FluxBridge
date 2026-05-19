@@ -25,14 +25,13 @@ import {
   BehaviorSubject,
   catchError,
   concatMap,
+  EMPTY,
   firstValueFrom,
   from,
   fromEvent,
-  interval,
   map,
   Observable,
-  of,
-  throwError
+  of
 } from 'rxjs';
 import { SwapResponseInterface } from '../features/ws-api/models/swap-response-interface';
 import { TransferSwapRequestInterface } from '../features/ws-api/chains/transfer-trade/models/transfer-swap-request-interface';
@@ -45,7 +44,6 @@ import { io, Socket } from 'socket.io-client';
 import { SdkLegacyService } from '../sdk-legacy.service';
 import { DeflationTokenLowSlippageError } from '@app/core/errors/models/common/deflation-token-low-slippage.error';
 import { RubicAny } from '@app/shared/models/utility-types/rubic-any';
-import { TurnstileService } from '@core/services/turnstile/turnstile.service';
 import {
   delay,
   exhaustMap,
@@ -86,7 +84,6 @@ export class RubicApiService {
 
   constructor(
     private readonly sdkLegacyService: SdkLegacyService,
-    private readonly turnstileService: TurnstileService,
     @Inject(NAVIGATOR) private readonly navigator: Navigator,
     @Inject(WINDOW) private readonly window: Window
   ) {}
@@ -104,31 +101,25 @@ export class RubicApiService {
   }
 
   /**
-   * @description tries get token immediately after call
-   * and refresh CF token every 4.5 minutes  and send it to rubic-api
+   * Cloudflare / Turnstile is disabled: no token refresh loop.
    */
   public initCfTokenAutoRefresh(): Observable<{ success: boolean; alreadyOpened: boolean }> {
-    this.refreshCloudflareToken(true);
-    return interval(4.5 * 60 * 1_000).pipe(switchMap(() => this.refreshCloudflareToken(false)));
+    return EMPTY;
   }
 
+  /**
+   * Notifies the API that the client is ready; no human verification token is used.
+   */
   public async refreshCloudflareToken(
     needRecalculation: boolean
   ): Promise<{ success: boolean; alreadyOpened: boolean }> {
-    const alreadyOpened = await firstValueFrom(this.turnstileService.cfModalOpened$);
-    if (alreadyOpened) return { alreadyOpened: true, success: false };
-
-    await this.turnstileService.askForCloudflareToken();
-
-    const token = await firstValueFrom(this.turnstileService.token$);
-
     if (!this.client?.connected) {
       return { alreadyOpened: false, success: false };
     }
 
-    this.client.emit('auth_cloudflare', { token, needRecalculation });
+    this.client.emit('auth_cloudflare', { token: null, needRecalculation });
 
-    return { alreadyOpened: false, success: token !== null };
+    return { alreadyOpened: false, success: true };
   }
 
   public calculateAsync(params: WsQuoteRequestInterface, attempt = 0): void {
@@ -323,17 +314,16 @@ export class RubicApiService {
   }
 
   public handleQuotesAsync(): Observable<WrappedAsyncTradeOrNull> {
-    return this.turnstileService.token$.pipe(
-      first(el => el !== null),
-      switchMap(token => {
-        if (!token) return throwError(() => 'cloudflare token is undefined');
-
-        return fromEvent<
+    return this.socket$.pipe(
+      filter((socket): socket is NonNullable<typeof socket> => !!socket),
+      first(),
+      switchMap(socket =>
+        fromEvent<
           WsQuoteResponseInterface & {
             data: RubicApiErrorDto;
             type: string;
           }
-        >(this.client, 'events').pipe(
+        >(socket, 'events').pipe(
           concatMap(wsResponse => {
             const { trade, total, calculated, data } = wsResponse;
             if (!this.latestQuoteParams) {
@@ -381,8 +371,8 @@ export class RubicApiService {
               }))
             );
           })
-        );
-      }),
+        )
+      ),
       retry({ delay: 1_000 })
     );
   }
@@ -467,7 +457,7 @@ export class RubicApiService {
     switch (result.code) {
       case 6001:
       case 6002: {
-        return from(this.refreshCloudflareToken(true)).pipe(map(res => res.success));
+        return of(false);
       }
       default:
         return of(false);
