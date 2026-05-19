@@ -11,7 +11,15 @@ export function initSentry(): void {
     return;
   }
 
-  const sentryAllowUrlRegexpString = /https:\/\/.*\.rubic\.exchange/;
+  /**
+   * Only send events when the app runs on these origins (stack URLs / page URL checks).
+   * Includes Rubic domains, production FluxBridge, and Vercel preview deployments.
+   */
+  const sentryAllowUrls: RegExp[] = [
+    /https:\/\/([\w-]+\.)*rubic\.exchange/i,
+    /https:\/\/([\w-]+\.)*fluxbridge\.cc/i,
+    /https:\/\/[\w-]+\.vercel\.app/i
+  ];
 
   Sentry.init({
     dsn: 'https://b281c2a8f1bae4aa11a308d01fa61fb7@sentry.rubic.exchange/2',
@@ -46,7 +54,7 @@ export function initSentry(): void {
     replaysSessionSampleRate: 0.1,
     replaysOnErrorSampleRate: 1.0,
     enableLogs: true,
-    allowUrls: [sentryAllowUrlRegexpString],
+    allowUrls: sentryAllowUrls,
     denyUrls: [
       //Chrome extensions
       /^chrome(-extension)?:\/\//i,
