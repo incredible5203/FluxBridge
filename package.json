@@ -2,7 +2,7 @@
   "name": "fluxbridge",
   "version": "1.0.3",
   "scripts": {
-    "postinstall": "node scripts/patch-webpack.js && patch-package",
+    "postinstall": "node scripts/patch-webpack.js && patch-package && node scripts/ensure-eslint-plugin-angular-rubic.js",
     "start:base": "npm run prebuild && node --max_old_space_size=8196 ./node_modules/@angular/cli/bin/ng serve --proxy-config proxy.conf.js --host local.rubic.exchange --port 4224 --ssl true --ssl-cert ssl/server.crt --ssl-key ssl/server.key --allowed-hosts all",
     "start": "npm run start:base --",
     "start:local": "npm run start:base -- --configuration=local",
@@ -36,7 +36,8 @@
     "e2e": "ng e2e",
     "lint-css": "stylelint '**/*.scss'",
     "pre-commit": "npx lint-staged",
-    "prepare": "node scripts/prepare-husky.js",
+    "prepare": "node scripts/prepare-husky.js && node scripts/ensure-eslint-plugin-angular-rubic.js",
+    "ensure:eslint-plugin": "node scripts/ensure-eslint-plugin-angular-rubic.js",
     "unused-css": "ngx-unused-css",
     "compodoc": "compodoc -p tsconfig.doc.json -s",
     "precompile": "node scripts/build-timestamp.js",
