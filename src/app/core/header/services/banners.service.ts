@@ -4,6 +4,9 @@ import { ApiBanner } from '../models/banners';
 import { HttpService } from '@app/core/services/http/http.service';
 import { shareReplayConfig } from '@app/shared/constants/common/share-replay-config';
 
+/** Set to true to fetch and show header promo banners from the API. */
+const BANNERS_ENABLED = false;
+
 // refetch banners every 10 minutes
 const REFETCH_AFTER = 60 * 10 * 1_000;
 
@@ -94,49 +97,36 @@ export class BannersService {
     return url.startsWith(APP) ? url.replace(APP, LOCAL) : url;
   }
 
-  public readonly banners$: Observable<ApiBanner[]> = timer(0, REFETCH_AFTER).pipe(
-    switchMap(() =>
-      this.httpService
-        .get<ApiBanner[]>('v2/info/banners', {}, '', { retry: 2 })
-        .pipe(catchError(() => of(DEFAULT_BANNERS)))
-    ),
-    map(banners => {
-      const source = banners.length ? banners : DEFAULT_BANNERS;
+  public readonly banners$: Observable<ApiBanner[]> = BANNERS_ENABLED
+    ? timer(0, REFETCH_AFTER).pipe(
+        switchMap(() =>
+          this.httpService
+            .get<ApiBanner[]>('v2/info/banners', {}, '', { retry: 2 })
+            .pipe(catchError(() => of(DEFAULT_BANNERS)))
+        ),
+        map(banners => {
+          const source = banners.length ? banners : DEFAULT_BANNERS;
 
-      const filtered = source.filter(
-        b =>
-          b.linkUrl.includes('https://app.rubic.exchange') &&
-          this.hasOnlyAllowedLinks(b.text) &&
-          this.hasOnlyAllowedLinks(b.textMobile)
-      );
+          const filtered = source.filter(
+            b =>
+              b.linkUrl.includes('https://app.rubic.exchange') &&
+              this.hasOnlyAllowedLinks(b.text) &&
+              this.hasOnlyAllowedLinks(b.textMobile)
+          );
 
-      return filtered.length
-        ? filtered.map(b => ({
-            ...b,
-            linkUrl: this.transformLinkUrl(b.linkUrl),
-            text: this.transformBannerHtml(b.text),
-            textMobile: this.transformBannerHtml(b.textMobile)
-          }))
-        : [];
-    }),
-    // map(banners =>
-    //   (banners.length ? banners : DEFAULT_BANNERS)
-    //     .filter(
-    //       banner => banner.linkUrl.includes('https://app.rubic.exchange') // ✅ keep only matching
-    //     )
-    //     .map(banner => ({
-    //       ...banner,
-    //       linkUrl: banner.linkUrl.replace(
-    //         'https://app.rubic.exchange',
-    //         'https://local.rubic.exchange:4224'
-    //       ),
-    //       text: banner.text.replace(/rubic/gi, 'FluxBridge'),
-    //       textMobile: banner.textMobile.replace(/rubic/gi, 'FluxBridge')
-    //     }))
-    // ),
-    shareReplay(shareReplayConfig),
-    startWith([])
-  );
+          return filtered.length
+            ? filtered.map(b => ({
+                ...b,
+                linkUrl: this.transformLinkUrl(b.linkUrl),
+                text: this.transformBannerHtml(b.text),
+                textMobile: this.transformBannerHtml(b.textMobile)
+              }))
+            : [];
+        }),
+        shareReplay(shareReplayConfig),
+        startWith([])
+      )
+    : of([]);
 
   constructor(private readonly httpService: HttpService) {}
 }
