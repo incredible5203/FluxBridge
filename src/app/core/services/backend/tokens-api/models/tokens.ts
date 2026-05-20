@@ -5,8 +5,7 @@ import { TokenSecurity } from '@shared/models/tokens/token-security';
 export enum ENDPOINTS {
   TOKENS = 'v2/tokens/',
   FAVORITE_TOKENS = 'v2/tokens/favorite/',
-  TOKENS_SECURITY = 'v2/tokens_security/unknown_token',
-  NEW_TOKENS = 'v3/tmp/tokens/all'
+  TOKENS_SECURITY = 'v2/tokens_security/unknown_token'
 }
 
 export interface FavoriteTokenRequestParams {

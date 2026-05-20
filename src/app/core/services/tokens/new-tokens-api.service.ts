@@ -2,13 +2,10 @@ import { Injectable } from '@angular/core';
 import {
   BackendBalanceToken,
   BackendToken,
-  BalanceTokensBackendResponse,
   ENDPOINTS,
   FavoriteTokenRequestParams,
-  NewTokensBackendResponse,
   RatedBackendToken,
-  TokensBackendResponse,
-  UtilityBackendResponse
+  TokensBackendResponse
 } from '@core/services/backend/tokens-api/models/tokens';
 import { RatedToken, Token } from '@shared/models/tokens/token';
 import { Cache as Memo, Token as OldToken } from '@cryptorubic/core';
@@ -20,7 +17,7 @@ import {
   TEST_EVM_BLOCKCHAIN_NAME,
   BlockchainName
 } from '@cryptorubic/core';
-import { Observable, of } from 'rxjs';
+import { forkJoin, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpService } from '@core/services/http/http.service';
 import { ENVIRONMENT } from '../../../../environments/environment';
@@ -155,31 +152,44 @@ export class NewTokensApiService {
   ): Observable<
     Partial<Record<BlockchainName, { list: Token[]; total: number; haveMore: boolean }>>
   > {
-    return this.httpService
-      .get<Partial<Record<BlockchainName, NewTokensBackendResponse>>>(
-        ENDPOINTS.NEW_TOKENS,
-        { networks: chainsList.join(',') },
-        this.tokensApiUrl,
-        { retry: 2, timeoutMs: 15_000, external: true }
+    return forkJoin(
+      chainsList.map(chain =>
+        this.httpService
+          .get<TokensBackendResponse>(
+            ENDPOINTS.TOKENS,
+            { network: chain, pageSize: this.pageSize },
+            this.tokensApiUrl,
+            { retry: 2, timeoutMs: 15_000, external: true }
+          )
+          .pipe(
+            catchError(() =>
+              of<TokensBackendResponse>({
+                count: 0,
+                next: null,
+                previous: null,
+                results: []
+              })
+            )
+          )
       )
-      .pipe(
-        map(response => {
-          return chainsList.reduce((acc, blockchain) => {
-            // const blockchain = FROM_BACKEND_BLOCKCHAINS[chain];
-            const chainResponse = response[blockchain];
-            if (!chainResponse) return acc;
-
-            return {
-              ...acc,
-              [blockchain]: {
-                list: NewTokensApiService.prepareTokens(chainResponse.tokens),
-                total: chainResponse.count,
-                haveMore: Boolean(chainResponse.next_page)
-              }
-            };
-          }, {});
-        })
-      );
+    ).pipe(
+      map((responses: TokensBackendResponse[]) =>
+        chainsList.reduce((acc, chain, idx) => {
+          const backendResponse = responses[idx];
+          if (!backendResponse) {
+            return acc;
+          }
+          return {
+            ...acc,
+            [chain]: {
+              list: NewTokensApiService.prepareTokens(backendResponse.results),
+              total: backendResponse.count,
+              haveMore: Boolean(backendResponse.next)
+            }
+          };
+        }, {} as Partial<Record<BlockchainName, { list: Token[]; total: number; haveMore: boolean }>>)
+      )
+    );
   }
 
   @Memo({ maxAge: 60 * 60 * 1_000 })
@@ -191,30 +201,44 @@ export class NewTokensApiService {
       chain => !excludedChains.includes(chain)
     );
 
-    return this.httpService
-      .get<Partial<Record<BlockchainName, NewTokensBackendResponse>>>(
-        ENDPOINTS.NEW_TOKENS,
-        { networks: tier2blockchains.join(',') },
-        this.tokensApiUrl,
-        { retry: 2, timeoutMs: 15_000, external: true }
+    return forkJoin(
+      tier2blockchains.map(chain =>
+        this.httpService
+          .get<TokensBackendResponse>(
+            ENDPOINTS.TOKENS,
+            { network: chain, pageSize: this.pageSize },
+            this.tokensApiUrl,
+            { retry: 2, timeoutMs: 15_000, external: true }
+          )
+          .pipe(
+            catchError(() =>
+              of<TokensBackendResponse>({
+                count: 0,
+                next: null,
+                previous: null,
+                results: []
+              })
+            )
+          )
       )
-      .pipe(
-        map(response => {
-          return tier2blockchains.reduce((acc, blockchain) => {
-            const chainResponse = response[blockchain];
-            if (!chainResponse) return acc;
-
-            return {
-              ...acc,
-              [blockchain]: {
-                list: NewTokensApiService.prepareTokens(chainResponse.tokens),
-                total: chainResponse.count,
-                haveMore: Boolean(chainResponse.next_page)
-              }
-            };
-          }, {});
-        })
-      );
+    ).pipe(
+      map((responses: TokensBackendResponse[]) =>
+        tier2blockchains.reduce((acc, chain, idx) => {
+          const backendResponse = responses[idx];
+          if (!backendResponse) {
+            return acc;
+          }
+          return {
+            ...acc,
+            [chain]: {
+              list: NewTokensApiService.prepareTokens(backendResponse.results),
+              total: backendResponse.count,
+              haveMore: Boolean(backendResponse.next)
+            }
+          };
+        }, {} as Partial<Record<BlockchainName, { list: Token[]; total: number; haveMore: boolean }>>)
+      )
+    );
   }
 
   public fetchFavoriteTokens(): Observable<Token[]> {
@@ -285,38 +309,15 @@ export class NewTokensApiService {
       );
   }
 
+  /**
+   * Multi-chain portfolio balances were previously served from legacy `v3/tmp/tokens/get_user_token_balances`.
+   * There is no documented public v2 replacement on the Django API; callers should rely on per-chain
+   * balance reads via `TokensBalanceService` until Rubic exposes an equivalent.
+   */
   public getBackendBalances(
-    address: string
-  ): Observable<Partial<Record<BlockchainName, BackendBalanceToken[]>>> {
-    // @ts-ignore
-    return this.httpService
-      .get<BalanceTokensBackendResponse>(
-        `v3/tmp/tokens/get_user_token_balances?userAddress=${address}`,
-        {},
-        '',
-        {
-          retry: 2,
-          timeoutMs: 15_000
-        }
-      )
-      .pipe(
-        map(resp => {
-          const supportedChainObject = Object.fromEntries(
-            resp.supported_networks.map(chain => [chain, []])
-          );
-          const resultTokens = Object.entries(resp.tokens as RubicAny).reduce(
-            (acc, [blockchain, tokens]) => ({
-              ...acc,
-              [blockchain]: NewTokensApiService.prepareTokens<BackendBalanceToken, BalanceToken>(
-                tokens as BackendBalanceToken[]
-              )
-            }),
-            supportedChainObject as Partial<Record<BlockchainName, BackendBalanceToken[]>>
-          );
-          return resultTokens;
-        }),
-        catchError(() => of([]))
-      );
+    _address: string
+  ): Observable<Partial<Record<BlockchainName, BackendBalanceToken[]>> | null> {
+    return of(null);
   }
 
   public getUtilityTokenList(): Observable<{
@@ -324,24 +325,23 @@ export class NewTokensApiService {
     losers: Token[];
     trending: Token[];
   }> {
-    return this.httpService
-      .get<UtilityBackendResponse>('v3/tmp/tokens/utility', {}, '', {
-        retry: 2,
-        timeoutMs: 15_000
-      })
-      .pipe(
-        map(resp => ({
-          gainers: NewTokensApiService.prepareTokens<RatedBackendToken, Token>(resp.gainers),
-          losers: NewTokensApiService.prepareTokens<RatedBackendToken, Token>(resp.losers),
-          trending: NewTokensApiService.prepareTokens<RatedBackendToken, Token>(resp.trending)
-        })),
-        catchError(() =>
-          of({
-            gainers: [],
-            losers: [],
-            trending: []
-          })
-        )
-      );
+    return forkJoin({
+      trending$: this.fetchTrendTokens(),
+      gainers$: this.fetchGainersTokens(),
+      losers$: this.fetchLosersTokens()
+    }).pipe(
+      map(({ trending$, gainers$, losers$ }) => ({
+        trending: trending$,
+        gainers: gainers$,
+        losers: losers$
+      })),
+      catchError(() =>
+        of({
+          gainers: [] as Token[],
+          losers: [] as Token[],
+          trending: [] as Token[]
+        })
+      )
+    );
   }
 }

@@ -43,7 +43,6 @@ import { SwapBackupRateChangedModalComponent } from '@app/features/trade/compone
 import { TradeInfo } from '@app/features/trade/models/trade-info';
 import { RateChangeInfo } from '@app/features/trade/models/rate-change-info';
 import { AllSwapBackupsFailedModalComponent } from '@app/features/trade/components/all-swap-backups-failed-modal/all-swap-backups-failed-modal.component';
-import { TurnstileCheckComponent } from '@features/trade/components/turnstile-check/turnstile-check.component';
 import { AvailableBlockchain } from '@features/trade/components/assets-selector/services/blockchains-list-service/models/available-blockchain';
 import { Asset, AssetListType } from '@features/trade/models/asset';
 import { SwapRetryModalInput } from '@app/features/trade/components/swap-retry-pending-modal/models/swap-retry-modal-input';
@@ -324,30 +323,6 @@ export class ModalService {
           size: 's',
           fitContent: true,
           data: { trade, tradeInfo$, rateChangeInfo }
-        },
-        injector
-      )
-    );
-  }
-
-  /**
-   * Show Backup Swap Rate Changed dialog.
-   * @param trade Selected Backup Trade
-   * @param tradeInfo$ Trade Info
-   * @param rateChangeInfo Rate Change Info
-   * @param injector Injector
-   */
-  public openTurnstileModal(injector: Injector): Promise<boolean> {
-    this.setOpenedModalName('cloudflare-validation');
-    return firstValueFrom(
-      this.showDialog(
-        TurnstileCheckComponent,
-        {
-          title: 'Verifying you are human...',
-          size: 's',
-          fitContent: true,
-          closeable: false,
-          dismissible: false
         },
         injector
       )

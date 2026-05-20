@@ -29,6 +29,7 @@ import {
 } from '@cryptorubic/core';
 import { OnChainTrade } from '@app/core/services/sdk/sdk-legacy/features/on-chain/calculation-manager/common/on-chain-trade/on-chain-trade';
 import { CLEARSWAP_STATUS } from '@app/features/privacy/providers/clearswap/models/status';
+import { RubicApiService } from '@app/core/services/sdk/sdk-legacy/rubic-api/rubic-api.service';
 
 @Injectable()
 export class OnChainApiService {
@@ -39,6 +40,7 @@ export class OnChainApiService {
     private readonly sessionStorage: SessionStorageService,
     private readonly settingsService: SettingsService,
     private readonly targetNetworkAddressService: TargetNetworkAddressService,
+    private readonly rubicApiService: RubicApiService,
     @Inject(TUI_IS_MOBILE) private readonly isMobile: boolean
   ) {}
 
@@ -193,11 +195,16 @@ export class OnChainApiService {
     );
   }
 
-  public getClearswapStatus(id: string): Promise<{ status: CLEARSWAP_STATUS }> {
-    return firstValueFrom(
-      this.httpService.get<{ status: CLEARSWAP_STATUS }>(
-        `v3/tmp/statuses/clearswap/status?rubic_id=${id}`
-      )
-    );
+  public async getClearswapStatus(id: string): Promise<{ status: CLEARSWAP_STATUS }> {
+    const tx = await this.rubicApiService.fetchCrossChainTxStatusExtended(id);
+    const rawStatus = typeof tx.status === 'string' ? tx.status : 'PENDING';
+
+    if (rawStatus === 'SUCCESS') {
+      return { status: CLEARSWAP_STATUS.SUCCESS };
+    }
+    if (rawStatus === 'FAIL' || rawStatus === 'REVERT' || rawStatus === 'REVERTED') {
+      return { status: CLEARSWAP_STATUS.FAIL };
+    }
+    return { status: CLEARSWAP_STATUS.PENDING };
   }
 }
