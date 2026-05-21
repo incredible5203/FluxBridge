@@ -50,6 +50,7 @@ export class PlatformConfigurationService {
         retry(1),
         catchError(() => of(defaultInfoV3Config)),
         tap(infoV3Response => {
+          console.log('infoV3Response', infoV3Response);
           if (infoV3Response.appIsActive === true) {
             this.setBlockchainsInfo(infoV3Response.networks);
             this.setBalanceNetworks(infoV3Response.balanceNetworks);

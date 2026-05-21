@@ -148,7 +148,7 @@
       },
       {
         "title": "Кто может использовать наш сервис?",
-        "answer": "Наш сервис может использоваться в любой части мира владельцами криптовалюты, которые хотели бы совершать сделки в разных сетях и выполнять multi-chain транзакции. В наши функции также входят услуги для других проектов: создание настраиваемых мостов и интеграция виджета Rubic Relay, который позволяет пользователям совершать сделки непосредственно на веб-сайте сервиса с помощью Rubic. KYC не требуется для операций на app.rubic.exchange"
+        "answer": "Наш сервис может использоваться в любой части мира владельцами криптовалюты, которые хотели бы совершать сделки в разных сетях и выполнять multi-chain транзакции. В наши функции также входят услуги для других проектов: создание настраиваемых мостов и интеграция виджета Rubic Relay, который позволяет пользователям совершать сделки непосредственно на веб-сайте сервиса с помощью Rubic. KYC не требуется для операций на fluxbridge.cc"
       },
       {
         "title": "Как Rubic объединяет разных DEX провайдеров? ",
@@ -160,7 +160,7 @@
       },
       {
         "title": "Как связаться с поддержкой?",
-        "answer": "Если Вам нужна помощь, пожалуйста, обратитесь в нашу службу поддержки, отправив заявку на сайте в чате в правом нижнем углу, или в телеграмм <a href='https://t.me/RubicSupportBot' target='_blank'>https://t.me/RubicSupportBot</a>.\n\nLive chat - Пишите, для быстрого ответа. Мы онлайн 24/7.\n\nEmail support\n <a href='mailto:support@rubic.finance'>support@rubic.finance</a>  - Напишите нам, если вопрос сложный и нужно как следует разобраться.\n"
+        "answer": "Если Вам нужна помощь, пожалуйста, обратитесь в нашу службу поддержки, отправив заявку на сайте в чате в правом нижнем углу, или в телеграмм <a href='https://t.me/flux_bridge' target='_blank'>https://t.me/flux_bridge</a>.\n\nLive chat - Пишите, для быстрого ответа. Мы онлайн 24/7.\n\nEmail support\n <a href='mailto:support@rubic.finance'>support@rubic.finance</a>  - Напишите нам, если вопрос сложный и нужно как следует разобраться.\n"
       },
       {
         "title": "Что такое виджет Rubic Relay и как его интегрировать?",
@@ -196,7 +196,7 @@
       },
       {
         "title": "Почему статус Pending не меняется длительное время в Multi-chain транзакции?",
-        "answer": "Предположительно, цена на газ во время проведения транзакции резко возросла. \nЕсли вышеперечисленные способы не помогли, пожалуйста, свяжитесь с нашей службой поддержки через чат на сайте или Телеграм: <a href='https://t.me/RubicSupportBot' target='_blank'>https://t.me/RubicSupportBot</a>."
+        "answer": "Предположительно, цена на газ во время проведения транзакции резко возросла. \nЕсли вышеперечисленные способы не помогли, пожалуйста, свяжитесь с нашей службой поддержки через чат на сайте или Телеграм: <a href='https://t.me/flux_bridge' target='_blank'>https://t.me/flux_bridge</a>."
       },
       {
         "title": "Почему я не могу провести multi-chain транзакцию?",
@@ -491,7 +491,7 @@
   },
   "modals": {
     "confirmImportModal": {
-      "title": "Этот токен не указан на Rubic.exchange.",
+      "title": "Этот токен не указан на FluxBridge.",
       "text": "Добавляя его в качестве пользовательского токена, вы подтверждаете, что торгуете с ним на свой страх и риск."
     },
     "bridge": {
@@ -526,7 +526,7 @@
       "pageSoon": " page soon.",
       "title": "Транзакция успешно отправлена!",
       "ccrTitle": "Транзакция в исходной сети успешно отправлена!",
-      "seeDetailsCCR": " If your transaction seems to be taking longer than normal (more than 30 minutes), please contact our Support Team at <a class='modal__footer-link' href='mailto:support@rubic.exchange' target='_blank'>support@rubic.exchange</a>",
+      "seeDetailsCCR": " If your transaction seems to be taking longer than normal (more than 30 minutes), please contact our Support Team at <a class='modal__footer-link' href='mailto:support@fluxbridge.cc' target='_blank'>support@fluxbridge.cc</a>",
       "seeDetailsItBridge": "See transaction <a class='modal__footer-link' href='{{explorerLink}}' target='_blank'>details</a>.",
       "link": "My Trades"
     },

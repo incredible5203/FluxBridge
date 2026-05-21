@@ -45,7 +45,7 @@ export const MOBILE_NAVIGATION_LIST: { [key in Section]: NavigationItem[] } = {
     {
       translateKey: 'Twitter',
       type: 'external',
-      link: 'https://twitter.com/CryptoRubic'
+      link: 'https://twitter.com/fluxbridge'
     },
     {
       translateKey: 'Telegram',
@@ -55,7 +55,7 @@ export const MOBILE_NAVIGATION_LIST: { [key in Section]: NavigationItem[] } = {
     {
       translateKey: 'Mail',
       type: 'external',
-      link: 'mailto:support@rubic.finance'
+      link: 'mailto:support@fluxbridge.cc'
     },
     {
       translateKey: 'Discord',

@@ -74,11 +74,11 @@ import { RubicApiService } from '@app/core/services/sdk/sdk-legacy/rubic-api/rub
 import { SimulationFailedError } from '@app/core/errors/models/common/simulation-failed.error';
 import { RateChangeInfo } from '../../models/rate-change-info';
 import { UserRejectError } from '@app/core/errors/models/provider/user-reject-error';
-import { TurnstileService } from '@app/core/services/turnstile/turnstile.service';
-import { TrustlineService } from '../trustline-service/trustline.service';
 import { ApiSocketManager } from './socket-managers/socket-manager';
 import { WINDOW } from '@ng-web-apis/common';
-import { CloudflareSocketManager } from './socket-managers/cloudflare-socket-manager';
+import { DirectSocketManager } from './socket-managers/direct-socket-manager';
+import { TurnstileService } from '@app/core/services/turnstile/turnstile.service';
+import { TrustlineService } from '../trustline-service/trustline.service';
 
 const SENTRY_CF_STATUS = {
   hadFilledForm: false,
@@ -97,11 +97,7 @@ export class SwapsControllerService {
 
   private readonly socketSubs: Array<Subscription> = [];
 
-  private socketManager: ApiSocketManager = new CloudflareSocketManager(
-    this.rubicApiService,
-    this,
-    this.turnstileService
-  );
+  private socketManager: ApiSocketManager = new DirectSocketManager(this.rubicApiService, this);
 
   /**
    * Contains trades types, which were disabled due to critical errors.
@@ -176,8 +172,8 @@ export class SwapsControllerService {
      * this.plarformConfigSrv.useCF$.subscribe((useCloudflare) => {
      *    this.socketManager.removeSubs()
      *    this.socketManager = useCloudflare
-     *        ? new CloudflareSocketManager(this.rubicApiService)
-     *        : new DefaultSocketManager(this.rubicApiService)
+     *        ? new CloudflareSocketManager(this.rubicApiService, this, this.turnstileService)
+     *        : new DirectSocketManager(this.rubicApiService, this)
      *    this.socketManager.initSubs();
      * })
      */
@@ -607,8 +603,9 @@ export class SwapsControllerService {
           return of(null);
         }),
         concatMap(container => {
-          const wrappedTrade = container?.value?.wrappedTrade;
-          const isCalculationEnd = container.value.total === container.value.calculated;
+          const value = container?.value;
+          const wrappedTrade = value?.wrappedTrade;
+          const isCalculationEnd = value != null && value.total === value.calculated;
 
           if (wrappedTrade && this.swapFormService.isFilled) {
             const isEqualFromAmount = this.checkIsEqualFromAmount(
@@ -625,10 +622,12 @@ export class SwapsControllerService {
               wrappedTrade?.error
             );
 
-            const needAddTrustline = this.trustlineService.checkTrustline(
-              wrappedTrade.trade,
-              this.authService.userAddress,
-              this.targetNetworkAddressService.address
+            const needAddTrustline$ = from(
+              this.trustlineService.checkTrustline(
+                wrappedTrade.trade,
+                this.authService.userAddress,
+                this.targetNetworkAddressService.address
+              )
             );
 
             return forkJoin([
@@ -636,7 +635,7 @@ export class SwapsControllerService {
               needApprove$,
               of(container.type),
               isNotLinkedAccount$,
-              needAddTrustline
+              needAddTrustline$
             ])
               .pipe(
                 tap(([trade, needApprove, type, isNotLinkedAccount, needTrustline]) => {
@@ -656,10 +655,7 @@ export class SwapsControllerService {
                       needTrustline
                     );
                     this.swapsStateService.pickProvider(isCalculationEnd);
-                    this.swapsStateService.setCalculationProgress(
-                      container.value.total,
-                      container.value.calculated
-                    );
+                    this.swapsStateService.setCalculationProgress(value.total, value.calculated);
                     this.setTradeAmount();
                     if (isCalculationEnd) {
                       this.refreshService.setStopped();
@@ -680,17 +676,14 @@ export class SwapsControllerService {
           if (isCalculationEnd) {
             this.refreshService.setStopped();
           }
-          if (!container?.value || !this.swapFormService.isFilled) {
+          if (!value || !this.swapFormService.isFilled) {
             this.refreshService.setStopped();
             this.swapsStateService.clearProviders(true);
           } else {
-            this.swapsStateService.setCalculationProgress(
-              container.value.total,
-              container.value.calculated
-            );
+            this.swapsStateService.setCalculationProgress(value.total, value.calculated);
           }
-          if (container.value.tradeType) {
-            this.swapsStateService.removeOldProvider(container.value.tradeType);
+          if (value?.tradeType) {
+            this.swapsStateService.removeOldProvider(value.tradeType);
           }
           return of(null);
         }),

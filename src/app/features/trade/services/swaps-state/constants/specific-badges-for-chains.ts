@@ -55,7 +55,7 @@ export const SPECIFIC_BADGES_FOR_CHAINS: Partial<Record<BlockchainName, BadgeInf
       },
       getLabel: () => 'GASLESS',
       getHint: () =>
-        'Gasless? Yep. On Solana, Rubic pays your gas fees for 5 swaps over $100 every day!',
+        'Gasless? Yep. On Solana, We pay your gas fees for 5 swaps over $100 every day!',
       showLabel: showSolanaGaslessLabel
     }
   ]

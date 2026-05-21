@@ -2,31 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
 >
     <url>
-        <loc>https://app.rubic.exchange</loc>
+        <loc>https://fluxbridge.cc</loc>
         <lastmod>2024-06-07T16:20:13.860Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://app.rubic.exchange/retrodrop</loc>
+        <loc>https://fluxbridge.cc/retrodrop</loc>
         <lastmod>2024-06-07T16:20:13.860Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://app.rubic.exchange/airdrop</loc>
+        <loc>https://fluxbridge.cc/airdrop</loc>
         <lastmod>2024-06-07T16:20:13.860Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://app.rubic.exchange/history</loc>
+        <loc>https://fluxbridge.cc/history</loc>
         <lastmod>2024-06-07T16:20:13.860Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://app.rubic.exchange/staking</loc>
+        <loc>https://fluxbridge.cc/staking</loc>
         <lastmod>2024-06-07T16:20:13.860Z</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>

@@ -312,7 +312,7 @@
       },
       {
         "title": "Hizmetimizi kimler kullanabilir?",
-        "answer": "Hizmetimiz, dünyanın herhangi bir yerinde, farklı ağlarda alım satım yapmak ve aralarındaki çok zincirli takasları tamamlamak isteyen kripto kullanıcıları tarafından kullanılabilir. Özelliklerimiz ayrıca diğer projeler için hizmetleri de içerir: özel köprülerin oluşturulması ve kullanıcıların Rubic kullanarak doğrudan hizmet web sitesinde alım satımları tamamlamasına olanak tanıyan Rubic Relay widget'ının entegrasyonu. app.rubic.exchange'te herhangi bir işlem için \tKYC gerekli değildir"
+        "answer": "Hizmetimiz, dünyanın herhangi bir yerinde, farklı ağlarda alım satım yapmak ve aralarındaki çok zincirli takasları tamamlamak isteyen kripto kullanıcıları tarafından kullanılabilir. Özelliklerimiz ayrıca diğer projeler için hizmetleri de içerir: özel köprülerin oluşturulması ve kullanıcıların Rubic kullanarak doğrudan hizmet web sitesinde alım satımları tamamlamasına olanak tanıyan Rubic Relay widget'ının entegrasyonu. fluxbridge.cc'te herhangi bir işlem için \tKYC gerekli değildir"
       },
       {
         "title": "Rubic, farklı DEX platformlarını nasıl birleştiriyor?",
@@ -324,7 +324,7 @@
       },
       {
         "title": "Destek ile Nasıl İletişime Geçilir?",
-        "answer": "Yardıma ihtiyacınız olursa, web sitemizde veya Telegram'ımızda bir bilet göndererek buradan destek ekibimizle iletişime geçmekten çekinmeyin: <a href='https://t.me/RubicSupportBot' target='_blank'>https://t.me/RubicSupportBot</a>\n\n Canlı sohbet - Sohbeti kullanarak anında yardım almak için Rubic ekibiyle iletişime geçin. 7/24 ulaşılabilir.\n\nE-posta Desteği - <a href='mailto:support@rubic.finance'>support@rubic.finance</a>. Daha karmaşık veya teknik sorularla istediğiniz zaman Rubic Desteğine mesaj gönderin. Yardım etmek için buradayız."
+        "answer": "Yardıma ihtiyacınız olursa, web sitemizde veya Telegram'ımızda bir bilet göndererek buradan destek ekibimizle iletişime geçmekten çekinmeyin: <a href='https://t.me/flux_bridge' target='_blank'>https://t.me/flux_bridge</a>\n\n Canlı sohbet - Sohbeti kullanarak anında yardım almak için Rubic ekibiyle iletişime geçin. 7/24 ulaşılabilir.\n\nE-posta Desteği - <a href='mailto:support@rubic.finance'>support@rubic.finance</a>. Daha karmaşık veya teknik sorularla istediğiniz zaman Rubic Desteğine mesaj gönderin. Yardım etmek için buradayız."
       },
       {
         "title": "Rubic Relay widget'ı nedir ve nasıl entegre edebiliriz?",
@@ -336,7 +336,7 @@
       },
       {
         "title": "On-Chain takasım neden uzun süreli “Beklemede” durumuna sahip?",
-        "answer": "Sebep:\nAyarlanan gaz ücreti işleminizi gerçekleştirmek için yeterli olmayabilir.\n\n Nasıl çözülür:\n İşlem ”Beklemede” ise, en iyisi şu şekilde değiştirerek işlemi manuel olarak hızlandırmaktır. işlemin tamamlanmasını zorlamak için istenen gaz değeri. Cüzdanınız üzerinden yapılabilir. Ek bir gaz ücreti ödeyebileceksiniz.\n\nHâlâ yardıma ihtiyacınız varsa, buradan bir bilet göndererek veya Telegram üzerinden destek ekibimizle iletişime geçmekten çekinmeyin. <a href='https://t.me/RubicSupportBot' target='_blank'>https://t.me/RubicSupportBot</a>"
+        "answer": "Sebep:\nAyarlanan gaz ücreti işleminizi gerçekleştirmek için yeterli olmayabilir.\n\n Nasıl çözülür:\n İşlem ”Beklemede” ise, en iyisi şu şekilde değiştirerek işlemi manuel olarak hızlandırmaktır. işlemin tamamlanmasını zorlamak için istenen gaz değeri. Cüzdanınız üzerinden yapılabilir. Ek bir gaz ücreti ödeyebileceksiniz.\n\nHâlâ yardıma ihtiyacınız varsa, buradan bir bilet göndererek veya Telegram üzerinden destek ekibimizle iletişime geçmekten çekinmeyin. <a href='https://t.me/flux_bridge' target='_blank'>https://t.me/flux_bridge</a>"
       },
       {
         "title": "Why do I get the “Insufficient Balance” error?",
@@ -360,7 +360,7 @@
       },
       {
         "title": "Neden Çok Zincirli bir işlemin uzun süreli ”Beklemede” statüsüne sahibim?",
-        "answer": "Muhtemelen, bu süre zarfında gaz fiyatları önemli ölçüde arttı. \nYukarıdaki yöntemler yardımcı olmadıysa, lütfen web sitesindeki sohbet veya Telegram aracılığıyla destek ekibimizle iletişime geçin: <a href='https://t.me/RubicSupportBot' target='_blank'>https://t.me/RubicSupportBot</a>."
+        "answer": "Muhtemelen, bu süre zarfında gaz fiyatları önemli ölçüde arttı. \nYukarıdaki yöntemler yardımcı olmadıysa, lütfen web sitesindeki sohbet veya Telegram aracılığıyla destek ekibimizle iletişime geçin: <a href='https://t.me/flux_bridge' target='_blank'>https://t.me/flux_bridge</a>."
       },
       {
         "title": "Neden çoklu zincir takasını yapamıyorum?",
@@ -625,7 +625,7 @@
   "modals": {
     "confirmImportModal": {
       "title": "Lütfen içe aktarma işleminizi onaylayın!",
-      "text": "Bu jeton Rubic.exchange'te listelenmiyor.\nBunu özel bir jeton olarak ekleyerek, onunla ticaret yaptığınızı onaylamış olursunuz."
+      "text": "Bu jeton FluxBridge'te listelenmiyor.\nBunu özel bir jeton olarak ekleyerek, onunla ticaret yaptığınızı onaylamış olursunuz."
     },
     "bridge": {
       "receiveWarning": "Bu köprü iki işlemden oluşmaktadır. İşlemi başlatırsanız, iptal edemezsiniz.",
@@ -659,7 +659,7 @@
       "pageSoon": "yakında sayfa.",
       "title": "İşlem başarıyla gönderildi!",
       "ccrTitle": "Kaynak ağda başarılı takas!",
-      "seeDetailsCCR": " If your transaction seems to be taking longer than normal (more than 30 minutes), please contact our Support Team at <a class='modal__footer-link' href='mailto:support@rubic.exchange' target='_blank'>support@rubic.exchange</a>",
+      "seeDetailsCCR": " If your transaction seems to be taking longer than normal (more than 30 minutes), please contact our Support Team at <a class='modal__footer-link' href='mailto:support@fluxbridge.cc' target='_blank'>support@fluxbridge.cc</a>",
       "seeDetailsItBridge": "See transaction <a class='modal__footer-link' href='{{explorerLink}}' target='_blank'>details</a>.",
       "link": "My Trades"
     },
